@@ -2,8 +2,9 @@
 const arrow_left = document.querySelector(".arrow_left");
 const arrow_right = document.querySelector(".arrow_right");
 const bannerImg = document.querySelector(".banner-img");
-const dotsContainer = document.querySelector(".dots"); // Conteneur des bullet points
+const dotsContainer = document.querySelector(".dots"); // Conteneur des bullets points
 
+//Tableau des images et des textes du diaporama
 const slides = [
   {
     image: "/slide1.jpg",
@@ -23,32 +24,40 @@ const slides = [
     tagLine: "Autocollants <span>avec découpe laser sur mesure</span>",
   },
 ];
-
 //Pour connaitre le nbre d'images
 //console.log(slides.length)
 
-//Pour trouver la source des images
-let srcImage = "./assets/images/slideshow";
+// Pour trouver la source des images
+const srcImage = "./assets/images/slideshow";
 
-//newImg = slides.image;
-newImg = slides[0].image;
-bannerImg.src = srcImage + newImg;
+// Sélection de l'élément p contenant le texte
+const tagLineElement = document.querySelector("#banner p");
 
-//Ajout des bullet point au slider
+// Fonction pour mettre à jour l'image, le texte et la classe 'dot_selected'
+function updateSlide(slideIndex) {
+  const slide = slides[slideIndex];
+  bannerImg.src = srcImage + slide.image;
+  bannerImg.alt = slide.tagLine;
+  tagLineElement.innerHTML = slide.tagLine;
 
+  const allDots = document.querySelectorAll(".dot");
+  allDots.forEach((dot, index) => {
+    if (index === slideIndex) {
+      dot.classList.add("dot_selected");
+    } else {
+      dot.classList.remove("dot_selected");
+    }
+  });
+}
+// Ajout des points au curseur et ajout d'un écouteur d'événements sur chaque point
 slides.forEach((slide, index) => {
   const dot = document.createElement("span");
   dot.classList.add("dot");
   dot.addEventListener("click", () => {
-    // Suppression de la classe 'dot_selected' de tous les points pour que l'élément sélectionné se différencie
-    const allDots = document.querySelectorAll(".dot");
-    allDots.forEach((otherDot) => {
-      otherDot.classList.remove("dot_selected");
-    });
-    // Ajout de la classe 'dot_selected' au point actuel
-    dot.classList.add("dot_selected");
-    
-    console.log("Aller à l'image", index + 1);
+    // Mise à jour de l'image, du texte et de la classe 'dot_selected'
+    updateSlide(index);
   });
   dotsContainer.appendChild(dot);
 });
+updateSlide(0);
+

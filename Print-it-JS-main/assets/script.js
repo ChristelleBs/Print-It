@@ -75,3 +75,16 @@ arrow_right.addEventListener("click", () => {
 
   updateSlide(nextIndex);
 });
+
+// Ajout d'un écouteur d'événements sur la flèche gauche
+arrow_left.addEventListener("click", () => {
+  // Recherche de l'index de la diapositive actuellement affichée
+  const currentIndex = slides.findIndex((slide) =>
+    bannerImg.src.endsWith(slide.image)
+  ); // Calcul de l'index de la diapositive précédente
+  let prevIndex = currentIndex - 1;
+  if (prevIndex < 0) {
+    prevIndex = slides.length - 1; // Ramène à la dernière diapositive si on dépasse la plage valide
+  } // Mise à jour de l'image, du texte et de la classe 'dot_selected'
+  updateSlide(prevIndex);
+});

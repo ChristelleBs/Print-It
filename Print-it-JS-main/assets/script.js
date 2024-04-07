@@ -61,3 +61,17 @@ slides.forEach((slide, index) => {
 });
 updateSlide(0);
 
+// Ajout d'un écouteur d'événements sur la flèche droite
+arrow_right.addEventListener("click", () => {
+  // Recherche de l'index de la diapositive actuellement affichée
+  const currentIndex = slides.findIndex((slide) =>
+    bannerImg.src.endsWith(slide.image)
+  ); // Calcul de l'index de la prochaine diapositive
+
+  let nextIndex = currentIndex + 1;
+  if (nextIndex >= slides.length) {
+    nextIndex = 0; // Ramène à zéro si on dépasse la longueur du tableau
+  } // Mise à jour de l'image, du texte et de la classe 'dot_selected'
+
+  updateSlide(nextIndex);
+});

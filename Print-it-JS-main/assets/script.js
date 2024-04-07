@@ -24,6 +24,7 @@ const slides = [
     tagLine: "Autocollants <span>avec découpe laser sur mesure</span>",
   },
 ];
+
 //Pour connaitre le nbre d'images
 //console.log(slides.length)
 
@@ -49,6 +50,7 @@ function updateSlide(slideIndex) {
     }
   });
 }
+
 // Ajout des points au curseur et ajout d'un écouteur d'événements sur chaque point
 slides.forEach((slide, index) => {
   const dot = document.createElement("span");
@@ -88,3 +90,18 @@ arrow_left.addEventListener("click", () => {
   } // Mise à jour de l'image, du texte et de la classe 'dot_selected'
   updateSlide(prevIndex);
 });
+
+// Gestion des événements de la souris sur les flèches
+function handleArrowHover() {
+  document.querySelectorAll(".arrow").forEach((arrow) => {
+    // Modification de la taille des flèches au chargement de la page
+    //arrow.style.width = "20px";
+    //arrow.style.height = "25px";
+
+    arrow.addEventListener("mouseenter", () => {
+      arrow.style.cursor = "pointer";
+    });
+  });
+}
+// Appel de la fonction pour toutes les flèches
+handleArrowHover();

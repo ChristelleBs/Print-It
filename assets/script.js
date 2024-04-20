@@ -68,7 +68,7 @@ let currentIndex = 0;
 
 // Ajout d'un écouteur d'événements sur la flèche droite
 arrow_right.addEventListener("click", () => {
-  // Calcul de l'index de la prochaine diapositive
+  // Calcul de l'index de la prochaine image
   let nextIndex = currentIndex + 1;
   if (nextIndex >= slides.length) {
     nextIndex = 0; // Ramène à zéro si on dépasse la longueur du tableau

@@ -63,32 +63,35 @@ slides.forEach((slide, index) => {
 });
 updateSlide(0);
 
+//Pour suivre l'index de l'image actuellement affichée
+let currentIndex = 0;
+
 // Ajout d'un écouteur d'événements sur la flèche droite
 arrow_right.addEventListener("click", () => {
-  // Recherche de l'index de la diapositive actuellement affichée
-  const currentIndex = slides.findIndex((slide) =>
-    bannerImg.src.endsWith(slide.image)
-  ); // Calcul de l'index de la prochaine diapositive
-
+  // Calcul de l'index de la prochaine diapositive
   let nextIndex = currentIndex + 1;
   if (nextIndex >= slides.length) {
     nextIndex = 0; // Ramène à zéro si on dépasse la longueur du tableau
-  } // Mise à jour de l'image, du texte et de la classe 'dot_selected'
-
+  }
+  // Mise à jour de l'image, du texte et de la classe 'dot_selected'
   updateSlide(nextIndex);
+
+  // Mettre à jour currentIndex pour suivre l'image actuellement affichée
+  currentIndex = nextIndex;
 });
 
 // Ajout d'un écouteur d'événements sur la flèche gauche
 arrow_left.addEventListener("click", () => {
-  // Recherche de l'index de la diapositive actuellement affichée
-  const currentIndex = slides.findIndex((slide) =>
-    bannerImg.src.endsWith(slide.image)
-  ); // Calcul de l'index de la diapositive précédente
+  // Calcul de l'index de l'image précédente
   let prevIndex = currentIndex - 1;
   if (prevIndex < 0) {
-    prevIndex = slides.length - 1; // Ramène à la dernière diapositive si on dépasse la plage valide
-  } // Mise à jour de l'image, du texte et de la classe 'dot_selected'
+    prevIndex = slides.length - 1; // Ramène à la dernière image si on atteint -1
+  }
+  // Mise à jour de l'image, du texte et de la classe 'dot_selected'
   updateSlide(prevIndex);
+
+  // Mettre à jour currentIndex pour suivre l'image actuellement affichée
+  currentIndex = prevIndex;
 });
 
 // Gestion des événements de la souris sur les flèches
